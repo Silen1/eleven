@@ -378,7 +378,6 @@ function dealData(originalJson) {
 }
 
 var process_wb = (function() {
-	var HTMLOUT = document.getElementById('htmlout');
 	return function process_wb(wb) {
 		wb.SheetNames.forEach(function(sheetName) {
             var jsonStr = XLSX.utils.sheet_to_json(wb.Sheets[sheetName]);
