@@ -37,6 +37,7 @@
         border-radius: 25px;
         font-size: 22px;
         box-shadow: 1px 3px 3px 0 #E0E0E0;
+        cursor: pointer;
       }
       .selected {
         color: #fff;
@@ -65,9 +66,7 @@
         position: fixed;
         left: 0;
         top: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        display: none;
       }
       .loading-wrap {
         width: 50px;
@@ -75,6 +74,24 @@
         display: flex;
         align-items: center;
         justify-content: center;
+      }
+      .loading-wrap-center {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+      .loading-wrap-left {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-150%, -50%);
+      }
+      .loading-wrap-right {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(50%, -50%);
       }
       .loading {
         width: 0;
@@ -166,13 +183,13 @@
           <div id="btn">开始处理</div>
       </div>
       <div class="loading-box">
-          <div class="loading-wrap">
+          <div class="loading-wrap loading-wrap-left">
               <div class="loading left-loading"></div>
           </div>
-          <div class="loading-wrap">
+          <div class="loading-wrap loading-wrap-center">
               <div class="loading center-loading"></div>
           </div>
-          <div class="loading-wrap">
+          <div class="loading-wrap loading-wrap-right">
               <div class="loading right-loading"></div>
           </div>
       </div>

@@ -24,6 +24,7 @@ var allDaysNum			// 处理多少天的数据 需求变更（变为当月总天�
 var nonworkdays = [];		// 这些天数之内的所有非工作日
 var originalJsonStr;
 var fileName;   // 拖放至窗口的文件名
+// var loading = document.querySelector('.loading-box');
 
 function improveDate(oldData) {
     oldData.forEach((item, index) => {
@@ -434,6 +435,8 @@ function beginProcessing() {
     if (!originalJsonStr) {
         electron.dialog.showMessageBox({ message: "请首先将表格拖入虚线窗口~", buttons: ['知道啦'] });
     }
+    electron.dialog.showMessageBox({ message: "努力处理中，请耐心等待~", buttons: ['知道啦'] });
+    // loading.style.display = 'block';
     document.querySelectorAll('.wrap div').forEach((item) => {
         item.classList.contains('selected') && nonworkdays.push(item.innerText);
     });
