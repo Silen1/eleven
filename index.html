@@ -58,6 +58,53 @@
         color: #fff;
         cursor: pointer;
       }
+      .loading-box {
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, .4);
+        position: fixed;
+        left: 0;
+        top: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .loading-wrap {
+        width: 50px;
+        height: 50px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .loading {
+        width: 0;
+        height: 0;
+        border-radius: 50%;
+        background: #fff;
+      }
+      .left-loading {
+        animation: kobe .6s ease-in-out infinite;
+      }
+      .center-loading {
+        animation: kobe .6s ease-in-out .2s infinite;
+      }
+      .right-loading {
+        animation: kobe .6s ease-in-out .4s infinite;
+      }
+      @keyframes kobe {
+        0% {
+          width: 0;
+          height: 0;
+        }
+        50% {
+          width: 50px;
+          height: 50px;
+        }
+        100% {
+          width: 0;
+          height: 0;
+        }
+      }
     </style>
   </head>
   <body>
@@ -117,6 +164,17 @@
       <div class="title">第三步：确认非工作日无误后，点击下方按钮进行计算</div>
       <div class="btnBox">
           <div id="btn">开始处理</div>
+      </div>
+      <div class="loading-box">
+          <div class="loading-wrap">
+              <div class="loading left-loading"></div>
+          </div>
+          <div class="loading-wrap">
+              <div class="loading center-loading"></div>
+          </div>
+          <div class="loading-wrap">
+              <div class="loading right-loading"></div>
+          </div>
       </div>
 
       <script src="renderer.js"></script>
