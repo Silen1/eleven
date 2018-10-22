@@ -372,8 +372,7 @@ function dealData(originalJson) {
     })
     // var data = [['姓名', '日期', '差异', '原因'], ['周欢', '2017/8/2', 15, 15, 15], ['周欢', '2017/8/2', 15, 15], ['周欢', '2017/8/2', 15, 15], ['周欢', '2017/8/2', 15, 15], ['周欢', '2017/8/2', 15, 15]]
 
-    // console.log(1, JSON.stringify(resultData, null, 4));
-    // 调用factory 并传入resultData
+    // 调用factory 传入resultData
     factory(resultData)
 }
 
