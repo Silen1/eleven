@@ -13,9 +13,13 @@
     "eleven"
   ],
   "author": "zhouhuan",
+  "productName": "huan",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^3.0.3",
+    "xlsx": "^0.14.0"
+  },
+  "dependencies": {
     "xlsx": "^0.14.0"
   }
 }
