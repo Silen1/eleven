@@ -21,7 +21,9 @@ var commentD = '说明4'
 var thisYear
 var thisMonth
 var allDaysNum			// 处理多少天的数据 需求变更（变为当月总天数）
-var nonworkdays		// 这些天数之内的所有非工作日
+var nonworkdays = [];		// 这些天数之内的所有非工作日
+var originalJsonStr;
+var fileName;   // 拖放至窗口的文件名
 
 function improveDate(oldData) {
     oldData.forEach((item, index) => {
@@ -147,13 +149,6 @@ function dealData(originalJson) {
                 allDaysNum = 31
             }
         })
-    }
-    // MARK
-    var tempNonworkdays = '1 2';
-    if (tempNonworkdays) {
-        nonworkdays = tempNonworkdays.split(' ')
-    } else {
-        alert('请刷新页面并填入非工作日之后再选择文件~')
     }
 
     // -----四-----
@@ -380,7 +375,8 @@ var process_wb = (function() {
 	return function process_wb(wb) {
 		wb.SheetNames.forEach(function(sheetName) {
             var jsonStr = XLSX.utils.sheet_to_json(wb.Sheets[sheetName]);
-            improveDate(jsonStr);
+            originalJsonStr = jsonStr;
+            electron.dialog.showMessageBox({ message: '文件' + fileName + "已读取成功，接下来请选择非工作日~", buttons: ['知道啦'] });
 		});
 	};
 })();
@@ -403,6 +399,7 @@ var do_file = (function() {
 	function handleDrop(e) {
 		e.stopPropagation();
         e.preventDefault();
+        fileName = e.dataTransfer.files[0].name;
 		do_file(e.dataTransfer.files);
 	}
 
@@ -427,7 +424,21 @@ var do_file = (function() {
     dates.forEach((item) => {
         item.addEventListener('click', handleClick, false);
     });
+
+    var btn = document.querySelector('#btn');
+
+    btn.addEventListener('click', beginProcessing);
 })();
+
+function beginProcessing() {
+    if (!originalJsonStr) {
+        electron.dialog.showMessageBox({ message: "请首先将表格拖入虚线窗口~", buttons: ['知道啦'] });
+    }
+    document.querySelectorAll('.wrap div').forEach((item) => {
+        item.classList.contains('selected') && nonworkdays.push(item.innerText);
+    });
+    improveDate(originalJsonStr);
+}
 
 function factory(resultData) {
     function sheet_from_array_of_arrays(data, opts) {
@@ -460,7 +471,7 @@ function factory(resultData) {
 
     /* result data */
     var data = resultData;
-    var ws_name = "eleven";
+    var ws_name = "huan";
 
     function Workbook() {
         if (!(this instanceof Workbook)) return new Workbook();
@@ -470,7 +481,6 @@ function factory(resultData) {
 
     var wb = new Workbook(), ws = sheet_from_array_of_arrays(data);
 
-    /* add worksheet to workbook */
     wb.SheetNames.push(ws_name);
     wb.Sheets[ws_name] = ws;
     var XTENSION = "xls|xlsx|xlsm|xlsb|xml|csv|txt|dif|sylk|slk|prn|ods|fods|htm|html".split("|")
@@ -483,5 +493,5 @@ function factory(resultData) {
     });
     o = o.split('.')[0] + '.xlsx';
     XLSX.writeFile(wb, o);
-    electron.dialog.showMessageBox({ message: "huan已为您将表格导出为" + o, buttons: ['嗯嗯'] });
+    electron.dialog.showMessageBox({ message: "huan已为您将表格导出为" + o, buttons: ['好哒'] });
 }
