@@ -414,7 +414,19 @@ var do_file = (function() {
 
 	drop.addEventListener('dragenter', handleDragover, false);
 	drop.addEventListener('dragover', handleDragover, false);
-	drop.addEventListener('drop', handleDrop, false);
+    drop.addEventListener('drop', handleDrop, false);
+
+    var dates = document.querySelectorAll('.wrap div');
+
+    function handleClick(e) {
+        e.stopPropagation();
+        e.preventDefault();
+        e.target.classList.toggle('selected')
+    }
+
+    dates.forEach((item) => {
+        item.addEventListener('click', handleClick, false);
+    });
 })();
 
 function factory(resultData) {

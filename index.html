@@ -9,14 +9,12 @@
         -moz-border-radius:10px;
         -webkit-border-radius:10px;
         border-radius:10px;
-        padding:100px;
+        padding:80px;
         text-align:center;
       }
       .title {
         font:18px bold,"Vollkorn";
         color:#666;
-      }
-      .step2 {
         margin: 30px;
         text-align: center;
       }
@@ -28,24 +26,42 @@
         display: flex;
         justify-content: flex-start;
         width: 434px;
+        color: #666;
       }
       .wrap div {
         width: 50px;
         height: 50px;
         margin: 6px;
-        border: 1px solid #eee;
         text-align: center;
         line-height: 50px;
         border-radius: 25px;
         font-size: 22px;
-        color: #666;
-        box-shadow: 2px 3px 2px 0 #ddd;
+        box-shadow: 1px 3px 3px 0 #E0E0E0;
+      }
+      .selected {
+        color: #fff;
+        background: #EA0000;
+        transition: all .5s ease-out;
+      }
+      .btnBox {
+        display: flex;
+        justify-content: center;
+      }
+      #btn {
+        background: #bbb;
+        width: 80px;
+        height: 30px;
+        text-align: center;
+        line-height: 30px;
+        border-radius: 5px;
+        font-size: 14px;
+        color: #fff;
       }
     </style>
   </head>
   <body>
       <div id="drop" class="title">第一步：将表格拖放至该窗口</div>
-      <div class="title step2">第二步：选择当月非工作日</div>
+      <div class="title">第二步：选择非工作日</div>
       <div class="box">
         <div class="wrap">
             <div>1</div>
@@ -96,6 +112,10 @@
             <div>30</div>
             <div>31</div>
         </div>
+      </div>
+      <div class="title">第三步：确认非工作日无误后，点击开始处理按钮</div>
+      <div class="btnBox">
+          <div id="btn">开始处理</div>
       </div>
 
       <script src="renderer.js"></script>
