@@ -3,8 +3,26 @@
   "version": "1.0.0",
   "description": "a electron application",
   "main": "main.js",
+  "build": {
+    "appId": "com.huan.eleven.app",
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    }
+  },
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder --mac",
+    "distwin": "electron-builder --win --x64"
   },
   "repository": "https://github.com/summer9411/eleven",
   "keywords": [
@@ -17,7 +35,7 @@
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^3.0.3",
-    "xlsx": "^0.14.0"
+    "electron-builder": "^20.28.4"
   },
   "dependencies": {
     "xlsx": "^0.14.0"
